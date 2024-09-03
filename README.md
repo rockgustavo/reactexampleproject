@@ -1,1 +1,3 @@
-# reactexampleproject
+# Project Example
+
+## React + TypeScript + Vite

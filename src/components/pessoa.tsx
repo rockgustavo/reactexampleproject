@@ -1,14 +1,14 @@
 interface NomeProps {
-  nome: String;
-  idade: number;
+  nome: string;
+  idade: string;
 }
 
 export function Pessoa({ nome, idade }: NomeProps) {
   return (
     <div>
-      <h2>Nome: {nome}</h2>
+      <h3>Nome: {nome}</h3>
       <h3>Idade: {idade}</h3>
-      *******************************
+      <hr />
     </div>
   );
 }

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 import { Header } from "./components/header";
 import { Pessoa } from "./components/pessoa";
+import { Listas } from "./components/listas";
 
 interface InfoPessoa {
   nome: string;
@@ -11,7 +12,8 @@ interface InfoPessoa {
 export default function App() {
   const [pessoa, setPessoa] = useState<InfoPessoa>({ nome: "", idade: "" });
 
-  function mostrarPessoa() {
+  function mostrarPessoa(event: FormEvent) {
+    event.preventDefault();
     if (pessoa.nome.length == 0 || pessoa.idade.length == 0) {
       alert("Preencha todos os campos");
       return;
@@ -41,6 +43,8 @@ export default function App() {
       <br />
       <br />
       <button onClick={mostrarPessoa}>Mostrar Pessoa</button>
+      <hr />
+      <Listas />
     </div>
   );
 }

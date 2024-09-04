@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, FormEvent } from "react";
+import { useState, useEffect, useRef, useMemo, FormEvent } from "react";
 
 interface ListaProps {
   task: string;
@@ -78,6 +78,10 @@ export function Listas() {
     localStorage.setItem("@reactExample", JSON.stringify([...removeTask]));
   }
 
+  const totalTarefas = useMemo(() => {
+    return tarefas.length;
+  }, [tarefas]);
+
   return (
     <div>
       <h2>Lista de Tarefas</h2>
@@ -94,6 +98,10 @@ export function Listas() {
       </form>
 
       {/* Exibe a lista de tarefas */}
+      <hr />
+      <strong>Você tem {totalTarefas} tarefas!</strong>
+      <br />
+      <br />
       <ul>
         {tarefas.map((item, index) => (
           <li key={index}>

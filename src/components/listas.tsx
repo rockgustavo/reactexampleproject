@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from "react";
+import { useState, useEffect, useRef, FormEvent } from "react";
 
 interface ListaProps {
   task: string;
@@ -12,12 +12,22 @@ export function Listas() {
     tarefa: "",
   });
 
+  const inputRef = useRef<HTMLInputElement>(null);
+  const firstRender = useRef<boolean>(true);
+
   useEffect(() => {
     const tarefasSalvas = localStorage.getItem("@reactExample");
     if (tarefasSalvas) {
       setTarefas(JSON.parse(tarefasSalvas));
     }
   }, []);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+  }, [tarefas]);
 
   function handleRegister(event: FormEvent): void {
     event.preventDefault();
@@ -31,10 +41,6 @@ export function Listas() {
     }
     setTarefas((tarefas) => [...tarefas, { task: input }]);
 
-    localStorage.setItem(
-      "@reactExample",
-      JSON.stringify([...tarefas, { task: input }])
-    );
     setInput("");
   }
 
@@ -51,16 +57,13 @@ export function Listas() {
         enabled: false,
         tarefa: "",
       });
-
-      localStorage.setItem(
-        "@reactExample",
-        JSON.stringify([...updatedTarefas])
-      );
       setInput("");
     }
   }
 
   function handleEdit(item: string): void {
+    inputRef.current?.focus();
+
     setInput(item);
     setEditTarefa({
       enabled: true,
@@ -83,6 +86,7 @@ export function Listas() {
           placeholder="Digite o nome da tarefa..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          ref={inputRef}
         />
         <button type="submit">
           {editTarefa.enabled ? "Editar Tarefa" : "Adicionar Tarefa"}

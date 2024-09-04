@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
 
 interface ListaProps {
   task: string;
@@ -12,6 +12,13 @@ export function Listas() {
     tarefa: "",
   });
 
+  useEffect(() => {
+    const tarefasSalvas = localStorage.getItem("@reactExample");
+    if (tarefasSalvas) {
+      setTarefas(JSON.parse(tarefasSalvas));
+    }
+  }, []);
+
   function handleRegister(event: FormEvent): void {
     event.preventDefault();
     if (!input) {
@@ -23,6 +30,11 @@ export function Listas() {
       return;
     }
     setTarefas((tarefas) => [...tarefas, { task: input }]);
+
+    localStorage.setItem(
+      "@reactExample",
+      JSON.stringify([...tarefas, { task: input }])
+    );
     setInput("");
   }
 
@@ -39,6 +51,11 @@ export function Listas() {
         enabled: false,
         tarefa: "",
       });
+
+      localStorage.setItem(
+        "@reactExample",
+        JSON.stringify([...updatedTarefas])
+      );
       setInput("");
     }
   }
@@ -54,6 +71,8 @@ export function Listas() {
   function handleDelete(item: string): void {
     const removeTask = tarefas.filter((tarefa) => tarefa.task !== item);
     setTarefas(removeTask);
+
+    localStorage.setItem("@reactExample", JSON.stringify([...removeTask]));
   }
 
   return (

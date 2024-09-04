@@ -1,4 +1,11 @@
-import { useState, useEffect, useRef, useMemo, FormEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+  FormEvent,
+} from "react";
 
 interface ListaProps {
   task: string;
@@ -29,20 +36,23 @@ export function Listas() {
     }
   }, [tarefas]);
 
-  function handleRegister(event: FormEvent): void {
-    event.preventDefault();
-    if (!input) {
-      alert("Preencha o nome da tarefa!");
-      return;
-    }
-    if (editTarefa.enabled) {
-      handleSaveEdit();
-      return;
-    }
-    setTarefas((tarefas) => [...tarefas, { task: input }]);
+  const handleRegister = useCallback(
+    (event: FormEvent) => {
+      event.preventDefault();
+      if (!input) {
+        alert("Preencha o nome da tarefa!");
+        return;
+      }
+      if (editTarefa.enabled) {
+        handleSaveEdit();
+        return;
+      }
+      setTarefas((tarefas) => [...tarefas, { task: input }]);
 
-    setInput("");
-  }
+      setInput("");
+    },
+    [input, tarefas]
+  );
 
   function handleSaveEdit() {
     const findEditTask = tarefas.findIndex(

@@ -1,11 +1,7 @@
-import { Header } from "../../components/header";
-import { Rotas } from "../../components/rotas";
-
 export function Home() {
   return (
     <div>
-      <Header title="Project Example" />
-      <Rotas />
+      <h1>Bem vindo à Home do Projeto</h1>
     </div>
   );
 }

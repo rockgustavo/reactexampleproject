@@ -6,26 +6,33 @@ import { Listas } from "./pages/listas";
 import { Produto } from "./pages/produto";
 import { NotFound } from "./pages/notfound";
 
+import { Layout } from "./components/layout";
+
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/formulario",
-    element: <Formulario />,
-  },
-  {
-    path: "/listas",
-    element: <Listas />,
-  },
-  {
-    path: "/produto/:id",
-    element: <Produto />,
-  },
-  {
-    path: "*",
-    element: <NotFound />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/formulario",
+        element: <Formulario />,
+      },
+      {
+        path: "/listas",
+        element: <Listas />,
+      },
+      {
+        path: "/produto/:id",
+        element: <Produto />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
+      },
+    ],
   },
 ]);
 

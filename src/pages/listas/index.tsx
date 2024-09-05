@@ -2,7 +2,7 @@ import { useState, FormEvent } from "react";
 
 import { Header } from "../../components/header";
 import { Pessoa } from "../../components/pessoa";
-import { Link } from "react-router-dom";
+import { Rotas } from "../../components/rotas";
 
 interface InfoPessoa {
   nome: string;
@@ -43,7 +43,7 @@ export function Listas() {
       <br />
       <button onClick={mostrarPessoa}>Mostrar Pessoa</button>
       <hr />
-      <Link to="/formulario">Formulario</Link>
+      <Rotas />
     </div>
   );
 }

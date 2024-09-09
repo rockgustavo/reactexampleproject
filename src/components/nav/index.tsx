@@ -5,13 +5,19 @@ export function Nav() {
     <nav className="nav">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link className="list" to="/">
+            Home
+          </Link>
         </li>
         <li>
-          <a href="/about">About</a>
+          <a className="list" href="/about">
+            About
+          </a>
         </li>
         <li>
-          <a href="/contact">Contact</a>
+          <a className="list" href="/contact">
+            Contact
+          </a>
         </li>
       </ul>
     </nav>
